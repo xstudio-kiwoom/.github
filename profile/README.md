@@ -40,13 +40,9 @@ AI가 대신
 </td>
 <td width="33%" valign="top">
 
-### 💬 AI 서비스
-고객·직원이 바로 쓰는
-AI 서비스
-
-·  주식 AI (stock-dosa)
-·  고객 컨시어지
-·  키우Me 챗봇
+### 💬 키움증권 대외 서비스
+키움 고객을 위한
+AI 서비스 개발·고도화
 
 </td>
 <td width="33%" valign="top">
@@ -79,6 +75,20 @@ AI를 잘 쓰는
 <div align="center">
 <sub>🔒 일부 저장소는 비공개입니다 — 팀 멤버로 초대되면 모두 열람할 수 있습니다.</sub>
 </div>
+
+---
+
+## 📦 전체 저장소
+
+<sub>이 목록은 매일 자동으로 갱신됩니다 — 팀원이 새 저장소를 올리면 자동 반영됩니다.</sub>
+
+<!-- REPO-LIST:START -->
+| 저장소 | 설명 |
+| :-- | :-- |
+| 🔒 [kiwoome-asp-qa-automation](https://github.com/xstudio-kiwoom/kiwoome-asp-qa-automation) | 키우Me 챗봇 AS-IS/TO-BE 답변 품질 자동 채점·비교 파이프라인 |
+| 🔒 [ai-bot-my-custom-bot](https://github.com/xstudio-kiwoom/ai-bot-my-custom-bot) | RAG·에이전트 기반 커스텀 챗봇(워크숍 산출) |
+| 🔒 [team-hub](https://github.com/xstudio-kiwoom/team-hub) | X-Studio 팀 허브 — 랜딩·로드맵·컨벤션 |
+<!-- REPO-LIST:END -->
 
 ---
 
