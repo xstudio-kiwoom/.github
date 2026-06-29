@@ -1,0 +1,63 @@
+name: Update org profile repo list
+
+on:
+  schedule:
+    # 매일 00:17 UTC (≈ 09:17 KST) 자동 실행
+    - cron: "17 0 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "저장소 목록이 줄어도 강제 갱신(안전가드 무시)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-profile-repos
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate repos.json
+        env:
+          # 조직 비공개 저장소까지 보려면 read:org 권한 토큰 필요.
+          # 기본 GITHUB_TOKEN은 다른 비공개 저장소를 볼 수 없으므로
+          # XSTUDIO_GIT_KEY(읽기전용 PAT) 시크릿을 우선 사용한다.
+          GH_TOKEN: ${{ secrets.XSTUDIO_GIT_KEY || github.token }}
+        run: |
+          gh api --paginate "orgs/${{ github.repository_owner }}/repos?per_page=100&type=all" \
+            -q '[.[] | {name, description, visibility, html_url, updated_at}]' > repos.json
+          echo "조회된 저장소: $(python3 -c "import json;print(len(json.load(open('repos.json'))))")개"
+
+      - name: Safety guard (no shrink)
+        if: ${{ !inputs.force }}
+        run: |
+          NEW=$(python3 -c "import json;d=json.load(open('repos.json'));print(len([r for r in d if r['name']!='.github']))")
+          OLD=$(awk '/REPO-LIST:START/{f=1;next}/REPO-LIST:END/{f=0}f' profile/README.md | grep -c '](http' || true)
+          echo "기존 $OLD개 → 신규 $NEW개"
+          if [ "$NEW" -lt "$OLD" ]; then
+            echo "::error::저장소 목록이 줄어듭니다($OLD → $NEW). 토큰 권한 부족으로 비공개 저장소가 누락됐을 수 있어 중단합니다. 의도된 축소라면 force=true로 재실행하세요."
+            exit 1
+          fi
+
+      - name: Update README
+        run: python3 scripts/gen_repo_list.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- profile/README.md; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git add profile/README.md
+            git commit -m "chore: 프로필 저장소 목록 자동 갱신 [skip ci]"
+            git push
+          fi
