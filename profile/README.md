@@ -85,11 +85,9 @@ AI를 잘 쓰는
 <!-- REPO-LIST:START -->
 | 저장소 | 설명 |
 | :-- | :-- |
-| 🔒 [Xstudio_Concierge_QC_automation](https://github.com/xstudio-kiwoom/Xstudio_Concierge_QC_automation) | X-Studio 컨시어지 QC 자동 평가 — 평가 코드 + 평가지식(gold/3축/예외/기획서_0626) + 기준 문서 (자체완결형) |
-| 🔒 [k-workkit](https://github.com/xstudio-kiwoom/k-workkit) | K-WorkKit — 직장인 업무 보조 키트 (FastAPI + Next.js) |
-| 🔒 [team-hub](https://github.com/xstudio-kiwoom/team-hub) | X-Studio 팀 허브 — 랜딩·로드맵·컨벤션 |
-| 🔒 [ai-bot-my-custom-bot](https://github.com/xstudio-kiwoom/ai-bot-my-custom-bot) | RAG·에이전트 기반 커스텀 챗봇(워크숍 산출) |
 | 🔒 [kiwoome-asp-qa-automation](https://github.com/xstudio-kiwoom/kiwoome-asp-qa-automation) | 키우Me 챗봇 AS-IS/TO-BE 답변 품질 자동 채점·비교 파이프라인 |
+| 🔒 [ai-bot-my-custom-bot](https://github.com/xstudio-kiwoom/ai-bot-my-custom-bot) | RAG·에이전트 기반 커스텀 챗봇(워크숍 산출) |
+| 🔒 [team-hub](https://github.com/xstudio-kiwoom/team-hub) | X-Studio 팀 허브 — 랜딩·로드맵·컨벤션 |
 <!-- REPO-LIST:END -->
 
 ---
